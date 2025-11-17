@@ -108,6 +108,7 @@
                 tools:text="Descripción detallada del producto" />
 
             <LinearLayout
+                android:id="@+id/layoutButtons"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/textViewDetailDescription"
@@ -136,6 +137,18 @@
                     app:strokeColor="@android:color/holo_red_dark" />
 
             </LinearLayout>
+            
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/buttonShare"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/layoutButtons"
+                android:layout_marginTop="16dp"
+                android:text="@string/share_product"
+                android:textSize="16sp"
+                app:icon="@android:drawable/ic_menu_share"
+                app:iconGravity="start" />
 
         </RelativeLayout>
 

@@ -20,6 +20,10 @@
     <string name="product_updated">Producto actualizado</string>
     <string name="product_deleted">Producto eliminado</string>
     <string name="fill_all_fields">Por favor complete todos los campos</string>
+    <string name="share_product">Compartir Producto</string>
+    <string name="share_text">¡Mira este producto de BeBeLuxury!\n\n%1$s\n%2$s\n\nPrecio: $%3$.2f\nStock disponible: %4$d unidades</string>
+    <string name="about">Acerca de</string>
+    <string name="lifecycle_demo">Demostración Ciclo de Vida</string>
     
     <string-array name="product_categories">
         <item>Bolsos</item>
