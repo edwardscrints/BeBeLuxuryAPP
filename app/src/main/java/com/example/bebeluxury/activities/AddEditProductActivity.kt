@@ -1,6 +1,7 @@
 package com.example.bebeluxury.activities
 
 import android.os.Bundle
+import android.util.Log
 import android.view.MenuItem
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
@@ -30,8 +31,13 @@ class AddEditProductActivity : AppCompatActivity() {
     private lateinit var editTextImageUrl: TextInputEditText
     private lateinit var buttonSave: MaterialButton
     
+    companion object {
+        private const val TAG = "AddEditProduct_Lifecycle"
+    }
+    
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        Log.d(TAG, "📱 onCreate() - Formulario creado")
         setContentView(R.layout.activity_add_edit_product)
         
         val toolbar = findViewById<MaterialToolbar>(R.id.toolbar)
@@ -66,6 +72,32 @@ class AddEditProductActivity : AppCompatActivity() {
         buttonSave.setOnClickListener {
             saveProduct()
         }
+        Log.d(TAG, "✅ onCreate() - Formulario inicializado en modo: ${if(isEditMode) "Edición" else "Creación"}")
+    }
+    
+    override fun onStart() {
+        super.onStart()
+        Log.d(TAG, "👀 onStart() - Formulario visible")
+    }
+    
+    override fun onResume() {
+        super.onResume()
+        Log.d(TAG, "▶️ onResume() - Usuario puede editar")
+    }
+    
+    override fun onPause() {
+        super.onPause()
+        Log.d(TAG, "⏸️ onPause() - Guardando estado temporal")
+    }
+    
+    override fun onStop() {
+        super.onStop()
+        Log.d(TAG, "⏹️ onStop() - Formulario oculto")
+    }
+    
+    override fun onDestroy() {
+        super.onDestroy()
+        Log.d(TAG, "💀 onDestroy() - Activity destruida")
     }
     
     private fun loadProduct(productId: Long) {

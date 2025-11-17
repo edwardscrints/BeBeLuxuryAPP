@@ -1,6 +1,7 @@
 package com.example.bebeluxury.activities
 
 import android.os.Bundle
+import android.util.Log
 import android.view.MenuItem
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
@@ -21,8 +22,13 @@ class ProductDetailActivity : AppCompatActivity() {
     private lateinit var repository: ProductRepository
     private var currentProduct: Product? = null
     
+    companion object {
+        private const val TAG = "ProductDetail_Lifecycle"
+    }
+    
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        Log.d(TAG, "📱 onCreate() - Activity de detalle creada")
         setContentView(R.layout.activity_product_detail)
         
         val toolbar = findViewById<MaterialToolbar>(R.id.toolbar)
@@ -48,14 +54,40 @@ class ProductDetailActivity : AppCompatActivity() {
         findViewById<MaterialButton>(R.id.buttonDelete).setOnClickListener {
             showDeleteConfirmationDialog()
         }
+        
+        findViewById<MaterialButton>(R.id.buttonShare).setOnClickListener {
+            shareProduct()
+        }
+        Log.d(TAG, "✅ onCreate() - Carga inicial completada")
+    }
+    
+    override fun onStart() {
+        super.onStart()
+        Log.d(TAG, "👀 onStart() - Detalle del producto visible")
     }
     
     override fun onResume() {
         super.onResume()
+        Log.d(TAG, "▶️ onResume() - Actualizando información del producto")
         val productId = intent.getLongExtra("PRODUCT_ID", -1)
         if (productId != -1L) {
             loadProduct(productId)
         }
+    }
+    
+    override fun onPause() {
+        super.onPause()
+        Log.d(TAG, "⏸️ onPause() - Perdiendo foco")
+    }
+    
+    override fun onStop() {
+        super.onStop()
+        Log.d(TAG, "⏹️ onStop() - Ya no visible")
+    }
+    
+    override fun onDestroy() {
+        super.onDestroy()
+        Log.d(TAG, "💀 onDestroy() - Activity destruida")
     }
     
     private fun loadProduct(productId: Long) {
@@ -88,6 +120,30 @@ class ProductDetailActivity : AppCompatActivity() {
                 Toast.makeText(this@ProductDetailActivity, R.string.product_deleted, Toast.LENGTH_SHORT).show()
                 finish()
             }
+        }
+    }
+    
+    private fun shareProduct() {
+        currentProduct?.let { product ->
+            // Uso de Intent implícito - Característica de Android
+            val shareText = getString(
+                R.string.share_text,
+                product.name,
+                product.description,
+                product.price,
+                product.stock
+            )
+            
+            val shareIntent = Intent().apply {
+                action = Intent.ACTION_SEND
+                putExtra(Intent.EXTRA_TEXT, shareText)
+                putExtra(Intent.EXTRA_SUBJECT, "Producto BeBeLuxury: ${product.name}")
+                type = "text/plain"
+            }
+            
+            // Mostrar chooser - Herramienta del dispositivo
+            startActivity(Intent.createChooser(shareIntent, "Compartir producto mediante:"))
+            Log.d(TAG, "📤 Compartiendo producto: ${product.name}")
         }
     }
     
