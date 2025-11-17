@@ -146,7 +146,7 @@ Para conectar con un servidor MySQL:
 
 Las dependencias de Retrofit ya están incluidas en `build.gradle.kts`.
 
-## 💡 Próximas mejoras sugeridas
+## 💡 Próximas mejoras para v1.2
 
 - [ ] Agregar búsqueda de productos
 - [ ] Filtrar por categoría
