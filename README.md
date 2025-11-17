@@ -81,19 +81,6 @@ app/src/main/
 └── AndroidManifest.xml (Activities registradas)
 ```
 
-## 🚀 Cómo ejecutar
-
-1. **Sincronizar Gradle**: 
-   - Abre el proyecto en Android Studio
-   - Espera a que se sincronicen las dependencias
-   - Click en "Sync Now" si aparece el mensaje
-
-2. **Compilar**: 
-   - Build → Make Project (Ctrl+F9)
-
-3. **Ejecutar**: 
-   - Run → Run 'app' (Shift+F10)
-   - Selecciona un emulador o dispositivo físico
 
 ## 📝 Modelo de Datos
 
